@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+<!--  <link rel="stylesheet" href="/assets/default.css" />-->
+  <title>Form</title>
+</head>
+<body>
+
+<form method="POST" action="/server-handler/sing-in">
+  <label for="login">Login:</label>
+  <input class="js-login-input" id="login" name="login" />
+  <span class="js-error-container"></span>
+
+  <label for="password">Password:</label>
+  <input id="password" type="password" name="password" />
+
+  <input type="submit" value="Sing in" />
+</form>
+
+<script type="text/javascript">
+
+  var isErrorShowed = false;
+
+  function showError(input, form) {
+    if (!isErrorShowed) {
+      input.setAttribute('style', 'border:1px solid #f00');
+      var spanForError = document.createElement('span');
+      var errorTextNode = document.createTextNode('Incorrect login format');
+      spanForError.setAttribute('style', 'color:#f00');
+      spanForError.appendChild(errorTextNode);
+      form.getElementsByClassName('js-error-container')[0].appendChild(spanForError);
+      isErrorShowed = true;
+    }
+  }
+
+  function validateLoginFormat(login) {
+    return /^\D+$/gi.test(login);
+  }
+
+  function hideError(input, form) {
+    if (isErrorShowed) {
+      input.removeAttribute('style');
+      var errorContainer = form.getElementsByClassName('js-error-container')[0];
+      var childNodes = errorContainer.childNodes;
+      errorContainer.removeChild(childNodes[0]);
+      isErrorShowed = false;
+    }
+  }
+
+  var form = document.querySelector('form');
+  var input = form.querySelector('.js-login-input');
+
+  form.addEventListener('submit', function(event){
+
+    try {
+      if(validateLoginFormat(input.value)) {
+        console.log('ok');
+      } else {
+        event.preventDefault();
+        showError(input, this);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  });
+
+  input.addEventListener('input', function() {
+    if (validateLoginFormat(this.value)) {
+      hideError(this, form);
+    } else {
+      showError(this, form);
+    }
+  });
+
+  // host objects: document, console
+  // object
+  // method (function)
+  // HOF
+  // function context
+  // string
+  // array
+  // comments
+  // number
+  // try/catch
+  // regexp
+  // if/else
+  // boolean
+  // var
+  // should improve DOM interactions
+  // closure
+  // state, var state
+
+
+</script>
+
+</body>
+</html>
