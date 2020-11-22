@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const autoprefixer = require('autoprefixer');
+const nested = require('postcss-nested');
 
 module.exports = {
   entry: './src/app/main.js',
@@ -44,11 +45,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.scss$/i,
+        test: /\.css$/i,
         use: [
           MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
+            options: { importLoaders: 1 },
           },
           {
             loader: 'postcss-loader',
@@ -56,13 +58,13 @@ module.exports = {
               postcssOptions: {
                 ident: 'postcss',
                 plugins: [
+                  nested(),
                   autoprefixer(),
                 ],
               },
             },
-          },
-          'sass-loader',
-        ],
+          }
+        ]
       },
       {
         test: /\.js$/,
@@ -70,7 +72,16 @@ module.exports = {
         use: {
           loader: 'babel-loader',
         },
-      }
+      },
+
+      {
+        test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2)$/i,
+        loader: 'file-loader',
+        options: {
+          publicPath: '/',
+          name: 'static/media/[name].[hash:8].[ext]',
+        },
+      },
     ],
   },
 };
