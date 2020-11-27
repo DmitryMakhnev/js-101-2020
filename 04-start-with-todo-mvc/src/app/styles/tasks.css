@@ -1,0 +1,26 @@
+/**
+* author: Ivan Metelev || ok.ru/i.metelev/
+* created: 13.10.19
+*
+* @project class: .tasks
+* @comments: Вывод списка задач
+**/
+
+/* Tasks list
+---------------------------------------------------------------------------------- */
+
+.tasks {
+    min-height: 296px;
+    }
+    .tasks:empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        }
+        .tasks:empty::before {
+            content: '⌨️';
+            font-size: 100px;
+            }
+
+/* /Tasks list
+---------------------------------------------------------------------------------- */

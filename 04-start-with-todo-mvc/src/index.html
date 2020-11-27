@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,300i&amp;display=swap&amp;subset=cyrillic" rel="stylesheet" />
+  <meta name="viewport" content="width=device-width" />
+  <title>Todo app</title>
+</head>
+<body>
+<div class="todo-app">
+
+  <header class="todo-app__header">
+    <h1 class="title">Todos</h1>
+  </header>
+
+  <main class="todo-app__frame">
+
+    <section class="todo-app__main-controls main-controls">
+      <div class="main-controls__select-all">
+        <button class="main-controls__select-all-button js-mark-all-todos-as-ready-action" title="Select all tasks">Select all tasks</button>
+      </div>
+      <form class="main-controls__create-new js-add-new-todo-form">
+        <input
+            type="text"
+            class="main-controls__create-new-input js-add-new-todo-input"
+            placeholder="What needs to be done?"
+            aria-label="Add new item"
+            autofocus="autofocus"
+        >
+      </form>
+    </section>
+
+    <section class="todo-app__tasks">
+      <ul class="todo-app__task-list tasks js-todo-items-list">
+<!--        <li class="todo-app__task-item task-item">-->
+<!--          <div class="task-item__view">-->
+<!--            <input type="checkbox" class="task-item__status-input" id="item1" aria-label="Completed task: HTML">-->
+<!--            <label class="task-item__status-icon" for="item1"></label>-->
+<!--            <span class="task-item__text">HTML</span>-->
+<!--            <button class="task-item__delete" title="Delete task">Delete task</button>-->
+<!--          </div>-->
+<!--          <div class="task-item__edit" hidden="hidden">-->
+<!--            <input type="text" class="task-item__input" value="HTML" aria-label="Edit task: HTML">-->
+<!--          </div>-->
+<!--        </li>-->
+
+<!--        <li class="todo-app__task-item task-item">-->
+<!--          <div class="task-item__view">-->
+<!--            <input type="checkbox" checked="checked" class="task-item__status-input" id="item2"-->
+<!--                   aria-label="Completed task: CSS">-->
+<!--            <label class="task-item__status-icon" for="item2"></label>-->
+<!--            <span class="task-item__text">CSS</span>-->
+<!--            <button class="task-item__delete" title="Delete task">Delete task</button>-->
+<!--          </div>-->
+<!--          <div class="task-item__edit" hidden="hidden">-->
+<!--            <input type="text" class="task-item__input" value="CSS" aria-label="Edit task: CSS">-->
+<!--          </div>-->
+<!--        </li>-->
+
+<!--        <li class="todo-app__task-item task-item">-->
+<!--          <div class="task-item__view">-->
+<!--            <input type="checkbox" class="task-item__status-input" id="item3" aria-label="Completed task: JS">-->
+<!--            <label class="task-item__status-icon" for="item3"></label>-->
+<!--            <span class="task-item__text">JS</span>-->
+<!--            <button class="task-item__delete" title="Delete task">Delete task</button>-->
+<!--          </div>-->
+<!--          <div class="task-item__edit" hidden="hidden">-->
+<!--            <input type="text" class="task-item__input" value="JS" aria-label="Edit task: JS">-->
+<!--          </div>-->
+<!--        </li>-->
+
+<!--        <li class="todo-app__task-item task-item">-->
+<!--          <div class="task-item__view">-->
+<!--            <input type="checkbox" class="task-item__status-input" id="item4" aria-label="Completed task: JS tools">-->
+<!--            <label class="task-item__status-icon" for="item4"></label>-->
+<!--            <span class="task-item__text">JS tools</span>-->
+<!--            <button class="task-item__delete" title="Delete task">Delete task</button>-->
+<!--          </div>-->
+<!--          <div class="task-item__edit" hidden="hidden">-->
+<!--            <input type="text" class="task-item__input" value="JS tools" aria-label="Edit task: JS tools">-->
+<!--          </div>-->
+<!--        </li>-->
+      </ul>
+    </section>
+
+    <section class="todo-app__actions-bar actions-bar">
+      <div class="actions-bar__item">
+        <div class="task-counter js-todo-items-left-counter">0 items left</div>
+      </div>
+
+      <div class="actions-bar__item js-todo-filters">
+        <div class="task-filter" role="group" aria-label="Filter tasks by status">
+          <label class="task-filter__item">
+            <input type="radio" class="task-filter__input js-todo-filter" name="filter" checked="checked" value="All">
+            <span class="task-filter__text" aria-label="Select all tasks">All</span>
+          </label>
+          <label class="task-filter__item">
+            <input type="radio" class="task-filter__input js-todo-filter" name="filter" value="Active">
+            <span class="task-filter__text" aria-label="Select active tasks">Active</span>
+          </label>
+          <label class="task-filter__item">
+            <input type="radio" class="task-filter__input js-todo-filter" name="filter" value="Completed">
+            <span class="task-filter__text" aria-label="Select completed tasks">Completed</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="actions-bar__item">
+        <button class="task-clear-completed js-clear-completed-action">Clear completed</button>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+</body>
+</html>

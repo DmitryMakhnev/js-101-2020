@@ -1,0 +1,30 @@
+{
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "modules": false,
+        "useBuiltIns": "entry",
+        "corejs": 3,
+        "loose": false
+      }
+    ]
+  ],
+
+  "plugins": [
+    "@babel/plugin-proposal-private-methods",
+    "@babel/plugin-transform-async-to-generator",
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-syntax-dynamic-import",
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "helpers": true,
+        "corejs": 3,
+        "regenerator": true,
+        "useESModules": true
+      }
+    ]
+  ]
+}
