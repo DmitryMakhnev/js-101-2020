@@ -10,6 +10,7 @@ export class TodosList extends AbstractDomMountComponent {
    * @private
    */
   _todos = [];
+  _currentFilterId = 'All';
 
   add(text) {
     const todoItemId = idsIterator++;
@@ -43,6 +44,40 @@ export class TodosList extends AbstractDomMountComponent {
       }
     });
     this._callbackMap.onItemsLeftChange(itemsLeftCount);
+  }
+
+  filter(filterId) {
+    this._currentFilterId = filterId;
+    this._filter();
+  }
+
+  _filter() {
+    this._todos.forEach(todoItem => {
+      switch (this._currentFilterId) {
+        case 'All':
+          todoItem.show();
+          break;
+        case 'Active':
+          todoItem.isReady ? todoItem.hide() : todoItem.show();
+          break;
+        case 'Completed':
+          todoItem.isReady ? todoItem.show() : todoItem.hide();
+          break;
+      }
+    });
+  }
+
+  clearCompleted() {
+    this._todos.slice().forEach(todoItem => {
+      if (todoItem.isReady) {
+        this._removeItem(todoItem);
+      }
+    });
+  }
+
+  markAllAsReady() {
+    this._todos.forEach(todoItem => todoItem.isReady = true);
+    this._filter();
   }
 
 }

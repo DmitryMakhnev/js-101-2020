@@ -24,4 +24,16 @@ export class TodoItem extends AbstractRenderingComponent {
   get isReady() {
     return this._readyMarker.checked;
   }
+
+  set isReady(value) {
+    this._readyMarker.checked = value;
+  }
+
+  show() {
+    this.root.style.display = 'block';
+  }
+
+  hide() {
+    this.root.style.display = 'none';
+  }
 }
