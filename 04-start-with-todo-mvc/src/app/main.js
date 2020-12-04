@@ -1,42 +1,43 @@
 import './styles/default.css';
-import { AddNewTodo } from './modules/add-new-todo/add-new-todo';
-import { TodosList } from './modules/todos-list/todos-list';
-import { ItemsLeftCounter } from './modules/items-left-counter/items-left-counter';
-import { Filters } from './modules/filters/filters';
+import { AddNewTodo } from './modules/components/add-new-todo/add-new-todo';
+import { TodosList } from './modules/components/todos-list/todos-list';
+import { ItemsLeftCounter } from './modules/components/items-left-counter/items-left-counter';
+import { Filters } from './modules/components/filters/filters';
+import { TodoListModel } from './modules/data-model/todo-list-model';
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // init
-  const addNewTodo = new AddNewTodo(
-    document.querySelector('.js-add-new-todo-form')
-  );
-  const todosList = new TodosList(
-    document.querySelector('.js-todo-items-list'),
-  );
-  const itemsLeftCounter = new ItemsLeftCounter(
-    document.querySelector('.js-todo-items-left-counter')
-  );
-  const filters = new Filters(
-    document.querySelector('.js-todo-filters')
+  const todoListModel = new TodoListModel();
+
+  new AddNewTodo(
+    document.querySelector('.js-add-new-todo-form'),
+    todoListModel
   );
 
-  // binding
-  todosList.events.on(
-    'itemsLeftChange',
-    itemsLeftCounter.changeCount,
-    itemsLeftCounter
+  new TodosList(
+    document.querySelector('.js-todo-items-list'),
+    todoListModel,
   );
-  addNewTodo.events.on('new', todosList.add, todosList);
-  filters.events.on('change', todosList.filter, todosList);
+
+  new ItemsLeftCounter(
+    document.querySelector('.js-todo-items-left-counter'),
+    todoListModel
+  );
+
+  new Filters(
+    document.querySelector('.js-todo-filters'),
+    todoListModel
+  );
 
   document.querySelector('.js-clear-completed-action')
     .addEventListener('click', () => {
-      todosList.clearCompleted();
+      todoListModel.clearCompleted();
     });
 
   document.querySelector('.js-mark-all-todos-as-ready-action')
     .addEventListener('click', () => {
-      todosList.markAllAsReady();
+      todoListModel.markAllAsReady();
     });
+
 
 });

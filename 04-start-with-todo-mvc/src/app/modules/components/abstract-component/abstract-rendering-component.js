@@ -1,23 +1,22 @@
-import EventEmitter from 'eventemitter3';
-
 export class AbstractRenderingComponent {
   /**
-   * @param {Object} props
+   * @param {Object} model
    */
-  constructor(props) {
-    this.events = new EventEmitter();
-    this.root = this._render(props);
+  constructor(model) {
+    this._model = model;
+    this.root = this._render(model);
     this._findElements();
     this._bindEvents();
+    this._bindModel(model);
   }
 
   /**
-   * @param {Object} props
+   * @param {Object} model
    * @return HTMLElement
    * @protected
    * @abstract
    */
-  _render(props) {}
+  _render(model) {}
 
   /**
    * @protected
@@ -28,4 +27,9 @@ export class AbstractRenderingComponent {
    * @protected
    */
   _bindEvents() {}
+
+  /**
+   * @protected
+   */
+  _bindModel(model) {}
 }

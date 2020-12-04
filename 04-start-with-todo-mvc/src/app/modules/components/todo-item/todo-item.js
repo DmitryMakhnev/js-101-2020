@@ -1,10 +1,17 @@
 import { createTodoItem } from './todo-item.template';
 import { AbstractRenderingComponent } from '../abstract-component/abstract-rendering-component';
+import EventEmitter from 'eventemitter3';
+
 
 export class TodoItem extends AbstractRenderingComponent {
 
-  _render(props) {
-    return createTodoItem(props);
+  constructor(model) {
+    super(model);
+    this.events = new EventEmitter();
+  }
+
+  _render(model) {
+    return createTodoItem(model);
   }
 
   _findElements() {
@@ -17,23 +24,7 @@ export class TodoItem extends AbstractRenderingComponent {
       this.events.emit('remove');
     });
     this._readyMarker.addEventListener('change', e => {
-      this.events.emit('readyChange', e.target.checked);
+      this._model.isReady = e.target.checked;
     });
-  }
-
-  get isReady() {
-    return this._readyMarker.checked;
-  }
-
-  set isReady(value) {
-    this._readyMarker.checked = value;
-  }
-
-  show() {
-    this.root.style.display = 'block';
-  }
-
-  hide() {
-    this.root.style.display = 'none';
   }
 }

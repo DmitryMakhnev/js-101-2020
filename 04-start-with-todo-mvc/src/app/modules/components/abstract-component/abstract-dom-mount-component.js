@@ -1,5 +1,3 @@
-import EventEmitter from 'eventemitter3';
-
 /**
  * @abstract
  */
@@ -7,17 +5,23 @@ export class AbstractDomMountComponent {
 
   /**
    * @param {HTMLFormElement} rootNode
+   * @param {*} model
    */
-  constructor(rootNode) {
-    this.events = new EventEmitter();
-
+  constructor(rootNode, model) {
     /**
      * @protected
      */
     this._rootNode = rootNode;
+    this._model = model;
     this._findElements();
     this._bindEvents();
+    this._bindModel(model);
   }
+
+  /**
+   * @protected
+   */
+  _bindModel(model) {}
 
   /**
    * @protected

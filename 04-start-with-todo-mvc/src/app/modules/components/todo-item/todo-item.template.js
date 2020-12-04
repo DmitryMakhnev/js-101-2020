@@ -1,4 +1,4 @@
-export function createTodoItem({ id, text }) {
+export function createTodoItem({ id, text, isReady }) {
   const root = document.createElement('li');
   root.className = 'todo-app__task-item task-item js-todo-items';
 
@@ -8,6 +8,7 @@ export function createTodoItem({ id, text }) {
 
   const checkbox = document.createElement('input');
   checkbox.className = 'task-item__status-input js-todo-ready-marker';
+  checkbox.checked = isReady;
   checkbox.setAttribute('type', 'checkbox');
   checkbox.setAttribute('aria-label', 'Completed task: HTML');
   checkbox.id = `item_${id}`;
@@ -18,12 +19,13 @@ export function createTodoItem({ id, text }) {
   label.setAttribute('for', checkbox.id);
   view.appendChild(label);
 
-  const itemText = document.createElement('span');
+  const itemText = document.createElement('input');
+  itemText.value = text;
   itemText.className = 'task-item__text';
   view.appendChild(itemText);
 
-  const itemTextNode = document.createTextNode(text);
-  itemText.appendChild(itemTextNode);
+  // const itemTextNode = document.createTextNode(text);
+  // itemText.appendChild(itemTextNode);
 
   const deleteButton = document.createElement('button');
   deleteButton.className = 'task-item__delete js-todo-item-remove-action';
