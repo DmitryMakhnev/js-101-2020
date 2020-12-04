@@ -14,25 +14,29 @@ export class TodosList extends AbstractDomMountComponent {
 
   add(text) {
     const todoItemId = idsIterator++;
-    const todoItem = new TodoItem(
-      { id: todoItemId, text },
-      {
-        onRemove: () => {
-          this._removeItem(todoItem);
-        },
-        onReadyChange: () => {
-          this._notifyAboutReadyChange();
-        }
-      }
-    );
+    const todoItem = new TodoItem({ id: todoItemId, text });
+
+    todoItem.events
+      .on('remove', () => this._removeItem(todoItem))
+      .on('readyChange', this._notifyAboutReadyChange, this);
+
     this._todos.push(todoItem);
     this._rootNode.appendChild(todoItem.root);
     this._notifyAboutReadyChange();
   }
 
+  /**
+   * @param {TodoItem} item
+   * @private
+   */
   _removeItem(item) {
     this._rootNode.removeChild(item.root);
     this._todos = this._todos.filter(currentItem => currentItem !== item);
+
+    item.events
+      .removeAllListeners('remove')
+      .off('readyChange', this._notifyAboutReadyChange, this);
+
     this._notifyAboutReadyChange();
   }
 
@@ -43,7 +47,7 @@ export class TodosList extends AbstractDomMountComponent {
         itemsLeftCount += 1;
       }
     });
-    this._callbackMap.onItemsLeftChange(itemsLeftCount);
+    this.events.emit('itemsLeftChange', itemsLeftCount);
   }
 
   filter(filterId) {
@@ -51,6 +55,9 @@ export class TodosList extends AbstractDomMountComponent {
     this._filter();
   }
 
+  /**
+   * @protected
+   */
   _filter() {
     this._todos.forEach(todoItem => {
       switch (this._currentFilterId) {

@@ -1,12 +1,12 @@
+import EventEmitter from 'eventemitter3';
 
 export class AbstractRenderingComponent {
   /**
    * @param {Object} props
-   * @param {Object<string, function(): void>} callbackMap
    */
-  constructor(props, callbackMap) {
+  constructor(props) {
+    this.events = new EventEmitter();
     this.root = this._render(props);
-    this._callbackMap = callbackMap;
     this._findElements();
     this._bindEvents();
   }

@@ -9,7 +9,7 @@ export class Filters extends AbstractDomMountComponent {
   _bindEvents() {
     this._filters.forEach(filter => {
       filter.addEventListener('change', e => {
-        this._callbackMap.onChange(e.target.value);
+        this.events.emit('change', e.target.value);
       });
     });
   }

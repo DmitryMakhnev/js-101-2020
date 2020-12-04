@@ -6,35 +6,28 @@ import { Filters } from './modules/filters/filters';
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // init
+  const addNewTodo = new AddNewTodo(
+    document.querySelector('.js-add-new-todo-form')
+  );
+  const todosList = new TodosList(
+    document.querySelector('.js-todo-items-list'),
+  );
   const itemsLeftCounter = new ItemsLeftCounter(
     document.querySelector('.js-todo-items-left-counter')
   );
-
-  const todosList = new TodosList(
-    document.querySelector('.js-todo-items-list'),
-    {
-      onItemsLeftChange(count) {
-        itemsLeftCounter.changeCount(count);
-      }
-    }
+  const filters = new Filters(
+    document.querySelector('.js-todo-filters')
   );
 
-  new AddNewTodo(
-    document.querySelector('.js-add-new-todo-form'),
-    {
-      onNew(newTodoText){
-        todosList.add(newTodoText);
-      }
-    });
-
-  new Filters(
-    document.querySelector('.js-todo-filters'),
-    {
-      onChange(filterId) {
-        todosList.filter(filterId);
-      }
-    }
-  )
+  // binding
+  todosList.events.on(
+    'itemsLeftChange',
+    itemsLeftCounter.changeCount,
+    itemsLeftCounter
+  );
+  addNewTodo.events.on('new', todosList.add, todosList);
+  filters.events.on('change', todosList.filter, todosList);
 
   document.querySelector('.js-clear-completed-action')
     .addEventListener('click', () => {

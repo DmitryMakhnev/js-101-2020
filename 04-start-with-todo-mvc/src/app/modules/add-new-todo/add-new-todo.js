@@ -16,7 +16,7 @@ export class AddNewTodo extends AbstractDomMountComponent {
     const currentNewTodoText = this._input.value.trim();
     if (currentNewTodoText) {
       this._input.value = '';
-      this._callbackMap.onNew(currentNewTodoText);
+      this.events.emit('new', currentNewTodoText);
     }
   }
 }

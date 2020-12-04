@@ -14,10 +14,10 @@ export class TodoItem extends AbstractRenderingComponent {
 
   _bindEvents() {
     this._removeAction.addEventListener('click', () => {
-      this._callbackMap.onRemove();
+      this.events.emit('remove');
     });
     this._readyMarker.addEventListener('change', e => {
-      this._callbackMap.onReadyChange(e.target.checked);
+      this.events.emit('readyChange', e.target.checked);
     });
   }
 
