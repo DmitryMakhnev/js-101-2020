@@ -9,7 +9,8 @@ export class TodoItemModel {
     makeObservable(
       this,
       {
-        isReady: observable
+        isReady: observable,
+        text: observable
       }
     );
     this.id = id;

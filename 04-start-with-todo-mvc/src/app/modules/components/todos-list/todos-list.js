@@ -6,16 +6,22 @@ import { autorun } from 'mobx';
 export class TodosList extends AbstractDomMountComponent {
 
   /**
+   * @type {Object<string, TodoItem>}
+   * @private
+   */
+  _visibleItems = {};
+
+  /**
    * @param {TodoListModel} model
    * @private
    */
   _bindModel(model) {
     autorun(() => {
       while (this._rootNode.firstChild) {
-        this._rootNode.firstChild.remove();
+        this._rootNode.removeChild(this._rootNode.firstChild);
       }
 
-      model.items
+      const filteredItems = model.items
         .filter(item => {
           switch (model.currentFilterId) {
             case 'All':
@@ -25,15 +31,32 @@ export class TodosList extends AbstractDomMountComponent {
             case 'Completed':
               return item.isReady;
           }
-        })
-        .forEach(itemModel => {
+        });
+
+      filteredItems.forEach(itemModel => {
+        const itemModelId = itemModel.id;
+        if (!this._visibleItems.hasOwnProperty(itemModelId)) {
           const todoItem = new TodoItem(itemModel);
           todoItem.events.on('remove', () => {
-            todoItem.events.removeAllListeners();
             this._model.removeItem(itemModel.id);
           });
-          this._rootNode.appendChild(todoItem.root);
-        });
+          this._visibleItems[itemModelId] = todoItem;
+        }
+      });
+
+      Object.keys(this._visibleItems || {}).forEach(visibleItemIdAsString => {
+        const visibleItemId = parseInt(visibleItemIdAsString, 10);
+        const itemFromModel = filteredItems.find(item => item.id === visibleItemId);
+        if (!itemFromModel) {
+          const itemFromVisibleItems = this._visibleItems[visibleItemIdAsString];
+          delete this._visibleItems[visibleItemIdAsString];
+          itemFromVisibleItems.events.removeAllListeners();
+        }
+      });
+
+      filteredItems.forEach(item => {
+        this._rootNode.appendChild(this._visibleItems[item.id].root);
+      });
     });
   }
 
