@@ -27,6 +27,7 @@
 ## How things work
 
 - [Prashant Palikhe — From code to pixels in a Blink](https://www.youtube.com/watch?v=rVb0pfGFZFw)
+- [Pete Hunt — React: Rethinking best practices](https://www.youtube.com/watch?v=x7cQ3mrcKaY)
 - [Вячеслав Егоров — JavaScript глазами JIT-компилятора](https://www.youtube.com/watch?v=tCG0aPNvkTs)
 - [Вячеслав Егоров — Производительность JavaScript через подзорную трубу](https://www.youtube.com/watch?v=HPFARivHJRY)
 - [Michael Saboff — JavaScriptCore, many compilers make this engine perform](https://www.youtube.com/watch?v=mtVBAcy7AKA)
