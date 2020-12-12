@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import { App } from './components/app/App';
 import reportWebVitals from './reportWebVitals';
+import { TodoListModel } from './data-model/todo-list-model';
+
+const todoListModel = new TodoListModel();
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <App todoListModel={todoListModel} />,
   document.getElementById('root')
 );
 

@@ -1,0 +1,74 @@
+/**
+* author: Ivan Metelev || ok.ru/i.metelev/
+* created: 13.10.19
+*
+* @project class: .todo-app
+* @comments: Каркас приложения
+**/
+
+/* Todo app main layout
+---------------------------------------------------------------------------------- */
+
+.todo-app {
+    position: relative;
+    width: 80%;
+    max-width: 560px;
+    min-width: 460px;
+    margin: 0 auto 20px;
+    }
+    .todo-app::before {
+        content: '';
+        position:absolute;
+        top: 100%;
+        left: 2px;
+        right: 2px;
+        height: 5px;
+        z-index: -1;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+    .todo-app::after {
+        content: '';
+        position:absolute;
+        top: 100%;
+        left: 4px;
+        right: 4px;
+        height: 10px;
+        z-index: -2;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+    .todo-app__header {
+
+        }
+
+    .todo-app__frame {
+        position: relative;
+        z-index: 1;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .todo-app__main-controls {
+            
+            }
+
+        .todo-app__tasks {
+
+            }
+
+            .todo-app__task-list {
+
+                }
+
+                .todo-app__task-item {
+
+                    }
+
+        .todo-app__actions-bar {
+
+            }
+
+/* /Todo app main layout
+---------------------------------------------------------------------------------- */
