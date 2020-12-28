@@ -1,13 +1,14 @@
 import { makeObservable, observable } from 'mobx'
 import { TodoItemModel } from './todo-item-model';
 
-let idIdCounter = 0;
-
 export class TodoListModel {
   /**
    * @type {TodoItemModel[]}
    */
   items = [];
+
+  isLoading = false;
+  error = null;
 
   currentFilterId = 'All';
 
@@ -17,14 +18,24 @@ export class TodoListModel {
       {
         items: observable.shallow,
         currentFilterId: observable,
+        isLoading: observable,
+        error: observable
       }
     );
   }
 
-  addItem = text => {
-    this.items.push(
-      new TodoItemModel(idIdCounter++, text)
-    );
+  storeInitialItems = todoItemDataModels => {
+    this.items = todoItemDataModels.map(todoItemDataModel => new TodoItemModel(
+      todoItemDataModel.id,
+      todoItemDataModel.text,
+      todoItemDataModel.isDone
+    ));
+  };
+
+  addItem = (id, text) => {
+    const newItem = new TodoItemModel(id, text);
+    this.items.push(newItem);
+    return newItem;
   }
 
   removeItem = id => {

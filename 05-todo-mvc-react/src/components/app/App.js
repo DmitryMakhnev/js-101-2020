@@ -1,40 +1,52 @@
 import React from 'react';
 import '../../styles/default.css';
-import { Header } from '../header/Header';
-import { MainControls } from '../main-controls/MainControls';
-import { Tasks } from '../tasks/Tasks';
-import { ActionsBar } from '../actions-bar/ActionsBar';
 import { observer } from 'mobx-react';
+import { TodosPage } from '../todos-page/TodosPage';
+import { AuthPage } from '../auth-page/AuthPage';
 
 export const App = observer(class extends React.Component {
+
+  componentDidMount() {
+    /**
+     * @type {UserController}
+     */
+    const userController = this.props.userController;
+    userController.checkAuthorization();
+  }
+
   render() {
     /**
      * @type {TodoListModel}
      */
-    const todoListModel = this.props.todoListModel;
+    const {
+      todoListModel,
+      userModel,
+      /**
+       * @type {UserController}
+       */
+      userController,
+      todoController
+    } = this.props;
+
+    if (userModel.isLoading) {
+      return <div>Loading...</div>
+    }
 
     return (
-      <div className="todo-app">
-        <Header />
-
-        <main className="todo-app__frame">
-          <MainControls
-            addNewTodo={todoListModel.addItem}
-            markAllAsReady={todoListModel.markAllAsReady}
+      userModel.isAuthorized
+        ? <>
+          <button onClick={() => userController.logout()}>
+            Sign out
+          </button>
+          <TodosPage
+            todoListModel={todoListModel}
+            todoController={todoController}
           />
-          <Tasks todoListModel={todoListModel}/>
-          <ActionsBar
-            activeFilter={todoListModel.currentFilterId}
-            changeFilter={filterId => todoListModel.currentFilterId = filterId}
-            itemsLeftCount={todoListModel.items.reduce(
-              (result, item) => result + (item.isReady ? 0 : 1),
-              0
-            )}
-            clearCompleted={todoListModel.clearCompleted}
-          />
-        </main>
-
-      </div>
+        </>
+        : <AuthPage
+          userModel={userModel}
+          userController={userController}
+        />
     );
   }
 })

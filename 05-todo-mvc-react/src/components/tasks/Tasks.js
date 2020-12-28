@@ -4,10 +4,16 @@ import { observer } from 'mobx-react';
 
 export const Tasks = observer(class extends React.Component {
   render() {
-    /**
-     * @type {TodoListModel}
-     */
-    const todoListModel = this.props.todoListModel;
+    const {
+      /**
+       * @type {TodoListModel}
+       */
+      todoListModel,
+      /**
+       * @type {TodoController}
+       */
+      todoController
+    } = this.props;
 
     return (
       <section className="todo-app__tasks">
@@ -27,9 +33,13 @@ export const Tasks = observer(class extends React.Component {
               <TaskItem
                 key={item.id}
                 itemModel={item}
-                readyChange={isReady => item.isReady = isReady}
-                textChange={text => item.text = text}
-                remove={() => todoListModel.removeItem(item.id)}
+                readyChange={isReady => todoController.updateTodo(
+                  { id: item.id, isDone: isReady }
+                )}
+                textChange={text => todoController.updateTodo(
+                  { id: item.id, text: text }
+                )}
+                remove={() => todoController.removeTodo(item.id)}
               />
             )}
         </ul>
