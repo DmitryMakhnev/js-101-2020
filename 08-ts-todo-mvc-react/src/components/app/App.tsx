@@ -3,8 +3,19 @@ import '../../styles/default.css';
 import { observer } from 'mobx-react';
 import { TodosPage } from '../todos-page/TodosPage';
 import { AuthPage } from '../auth-page/AuthPage';
+import { UserController } from '../../controllers/user.controller';
+import { TodoListModel } from '../../data-model/todo-list-model';
+import { UserModel } from '../../data-model/user-model';
+import { TodoController } from '../../controllers/todo.controller';
 
-export const App = observer(class extends React.Component {
+export const App = observer(class extends React.Component<
+  {
+    userController: UserController,
+    todoListModel: TodoListModel,
+    userModel: UserModel,
+    todoController: TodoController
+  }
+> {
 
   componentDidMount() {
     /**
@@ -15,15 +26,9 @@ export const App = observer(class extends React.Component {
   }
 
   render() {
-    /**
-     * @type {TodoListModel}
-     */
     const {
       todoListModel,
       userModel,
-      /**
-       * @type {UserController}
-       */
       userController,
       todoController
     } = this.props;

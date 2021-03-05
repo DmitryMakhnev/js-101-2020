@@ -1,14 +1,12 @@
+import { UserDataModel, UserModel } from '../data-model/user-model';
 
 export class UserController {
-  /**
-   * @param {UserModel} userModel
-   */
-  constructor(userModel) {
-    this._userModel = userModel;
-  }
+  constructor(
+    private userModel: UserModel
+  ) {}
 
-  checkAuthorization() {
-    this._userModel.isLoading = true;
+  checkAuthorization(): Promise<void> {
+    this.userModel.isLoading = true;
 
     return fetch(
       'http://localhost:3012/user',
@@ -20,7 +18,7 @@ export class UserController {
       .then(
         response => {
           if (response.ok) {
-            return response.json();
+            return response.json() as unknown as UserDataModel;
           } else {
             throw new Error('Unauthorized');
           }
@@ -28,20 +26,23 @@ export class UserController {
       )
       .then(
         userDataModel => {
-          this._userModel.dataModel = userDataModel;
-          this._userModel.isAuthorized = true;
+          this.userModel.dataModel = userDataModel;
+          this.userModel.isAuthorized = true;
         }
       )
-      .catch(e => {
-        this._userModel.error = e.message;
+      .catch((e: Error) => {
+        this.userModel.error = e.message;
       })
       .finally(() => {
-        this._userModel.isLoading = false;
+        this.userModel.isLoading = false;
       });
   }
 
-  authorize(login, password) {
-    this._userModel.isLoginLoading = true;
+  authorize(
+    login: string,
+    password: string
+  ): Promise<void> {
+    this.userModel.isLoginLoading = true;
 
     return fetch(
       'http://localhost:3012/auth/login',
@@ -61,7 +62,7 @@ export class UserController {
       .then(
         response => {
           if (response.ok) {
-            return response.json();
+            return response.json() as unknown as UserDataModel;
           } else {
             throw new Error('Incorrect login or password');
           }
@@ -69,20 +70,20 @@ export class UserController {
       )
       .then(
         userDataModel => {
-          this._userModel.dataModel = userDataModel;
-          this._userModel.isAuthorized = true;
+          this.userModel.dataModel = userDataModel;
+          this.userModel.isAuthorized = true;
         }
       )
       .catch(e => {
-        this._userModel.loginError = e.message;
+        this.userModel.loginError = e.message;
       })
       .finally(() => {
-        this._userModel.isLoginLoading = false;
+        this.userModel.isLoginLoading = false;
       });
   }
 
-  logout() {
-    fetch(
+  logout(): Promise<void> {
+    return fetch(
       'http://localhost:3012/auth/logout',
       {
         method: 'POST',

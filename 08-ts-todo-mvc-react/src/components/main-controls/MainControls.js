@@ -1,9 +1,13 @@
+// HOME WORK COMPONENT! Please don't rewrite me during lecture!
 import React, { createRef } from 'react';
 
+// HOME WORK COMPONENT! Please don't rewrite me during lecture!
 export class MainControls extends React.Component {
   _inputRef = createRef();
 
+  // HOME WORK COMPONENT! Please don't rewrite me during lecture!
   render() {
+    // HOME WORK COMPONENT! Please don't rewrite me during lecture!
     const onSubmit = e => {
       e.preventDefault();
       const input = this._inputRef.current;
@@ -14,6 +18,7 @@ export class MainControls extends React.Component {
       }
     }
 
+    // HOME WORK COMPONENT! Please don't rewrite me during lecture!
     return (
       <section className="todo-app__main-controls main-controls">
         <div className="main-controls__select-all">

@@ -2,11 +2,11 @@ import { makeObservable, observable } from 'mobx';
 
 export class TodoItemModel {
 
-  constructor(id, text, isReady) {
-    this.id = id;
-    this.isReady = isReady;
-    this.text = text;
-
+  constructor(
+    public id: string,
+    public text: string,
+    public isReady: boolean = false,
+  ) {
     makeObservable(
       this,
       {

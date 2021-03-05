@@ -1,16 +1,20 @@
 import { makeObservable, observable } from 'mobx';
 
+export type UserDataModel = {
+  id: string;
+  login: string;
+};
 
 export class UserModel {
 
-  isLoading = false;
-  error = null;
+  isLoading: boolean = false;
+  error: string|null = null;
 
-  isAuthorized = false;
-  dataModel = null;
+  isAuthorized: boolean = false;
+  dataModel: UserDataModel|null = null;
 
-  isLoginLoading = false;
-  loginError = null;
+  isLoginLoading: boolean = false;
+  loginError: string|null = null;
 
   constructor() {
     makeObservable(

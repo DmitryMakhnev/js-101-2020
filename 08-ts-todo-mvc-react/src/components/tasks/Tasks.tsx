@@ -1,17 +1,17 @@
 import React from 'react';
 import { TaskItem } from '../task-item/TaskItem';
 import { observer } from 'mobx-react';
+import { TodoListModel } from '../../data-model/todo-list-model';
+import { TodoController } from '../../controllers/todo.controller';
+import { TodosFilterVales } from '../../data-model/todos-filter-vales';
 
-export const Tasks = observer(class extends React.Component {
+export const Tasks = observer(class extends React.Component<{
+  todoListModel: TodoListModel,
+  todoController: TodoController,
+}> {
   render() {
     const {
-      /**
-       * @type {TodoListModel}
-       */
       todoListModel,
-      /**
-       * @type {TodoController}
-       */
       todoController
     } = this.props;
 
@@ -21,11 +21,11 @@ export const Tasks = observer(class extends React.Component {
           {todoListModel.items
             .filter(item => {
               switch (todoListModel.currentFilterId) {
-                case 'All':
+                case TodosFilterVales.All:
                   return true;
-                case 'Active':
+                case TodosFilterVales.Active:
                   return !item.isReady;
-                case 'Completed':
+                case TodosFilterVales.Completed:
                   return item.isReady;
               }
             })

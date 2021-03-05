@@ -1,11 +1,14 @@
 import React from 'react';
 import { observer } from 'mobx-react';
+import { TodoItemModel } from '../../data-model/todo-item-model';
 
-export const TaskItem = observer(class extends React.Component {
+export const TaskItem = observer(class extends React.Component<{
+  itemModel: TodoItemModel,
+  readyChange: (isReady: boolean) => void
+  textChange: (text: string) => void
+  remove: () => void
+}> {
   render() {
-    /**
-     * @type {TodoItemModel}
-     */
     const todoItem = this.props.itemModel;
 
     return (
@@ -22,7 +25,7 @@ export const TaskItem = observer(class extends React.Component {
           <label className="task-item__status-icon" htmlFor={`item_${todoItem.id}`} />
           <input
             className="task-item__text"
-            onInput={e => this.props.textChange(e.target.value)}
+            onInput={e => this.props.textChange((e.target as HTMLInputElement).value)}
             value={todoItem.text}
           />
           <button

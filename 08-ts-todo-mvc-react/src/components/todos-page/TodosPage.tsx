@@ -4,26 +4,23 @@ import { Header } from '../header/Header';
 import { MainControls } from '../main-controls/MainControls';
 import { Tasks } from '../tasks/Tasks';
 import { ActionsBar } from '../actions-bar/ActionsBar';
+import { TodoController } from '../../controllers/todo.controller';
+import { TodoListModel } from '../../data-model/todo-list-model';
 
-export const TodosPage = observer(class extends React.Component {
+export const TodosPage = observer(class extends React.Component<
+  {
+    todoController: TodoController,
+    todoListModel: TodoListModel
+  }
+> {
   componentDidMount() {
-    /**
-     * @type {TodoController}
-     */
     const todoController = this.props.todoController;
     todoController.getAll();
   }
 
   render() {
-
     const {
-      /**
-       * @type {TodoListModel}
-       */
       todoListModel,
-      /**
-       * @type {TodoController}
-       */
       todoController
     } = this.props;
 

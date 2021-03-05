@@ -1,12 +1,19 @@
 import React from 'react';
+import { TodosFilterVales } from '../../data-model/todos-filter-vales';
 
-export class ActionsBar extends React.Component {
+export class ActionsBar extends React.Component<{
+  activeFilter: TodosFilterVales,
+  itemsLeftCount: number,
+  changeFilter: (activeFilter: TodosFilterVales) => void,
+  clearCompleted: () => void,
+}> {
   render() {
     const activeFilter = this.props.activeFilter;
     const leftCount = this.props.itemsLeftCount;
-    const onFilterChange = e => {
-      if (e.target.checked) {
-        this.props.changeFilter(e.target.value);
+    const onFilterChange = (e: React.FormEvent<HTMLInputElement>) => {
+      const target = e.target as HTMLInputElement;
+      if (target.checked) {
+        this.props.changeFilter(target.value as TodosFilterVales);
       }
     }
 
@@ -23,35 +30,35 @@ export class ActionsBar extends React.Component {
             <label className="task-filter__item">
               <input
                 onChange={onFilterChange}
-                checked={activeFilter === 'All'}
-                value="All"
+                checked={activeFilter === TodosFilterVales.All}
+                value={TodosFilterVales.All}
                 type="radio"
                 className="task-filter__input js-todo-filter"
                 name="filter"
               />
-              <span className="task-filter__text" aria-label="Select all tasks">All</span>
+              <span className="task-filter__text" aria-label="Select all tasks">{TodosFilterVales.All}</span>
             </label>
             <label className="task-filter__item">
               <input
                 onChange={onFilterChange}
-                checked={activeFilter === 'Active'}
-                value="Active"
+                checked={activeFilter === TodosFilterVales.Active}
+                value={TodosFilterVales.Active}
                 type="radio"
                 className="task-filter__input js-todo-filter"
                 name="filter"
               />
-              <span className="task-filter__text" aria-label="Select active tasks">Active</span>
+              <span className="task-filter__text" aria-label="Select active tasks">{TodosFilterVales.Active}</span>
             </label>
             <label className="task-filter__item">
               <input
                 onChange={onFilterChange}
-                checked={activeFilter === 'Completed'}
-                value="Completed"
+                checked={activeFilter === TodosFilterVales.Completed}
+                value={TodosFilterVales.Completed}
                 type="radio"
                 className="task-filter__input js-todo-filter"
                 name="filter"
               />
-              <span className="task-filter__text" aria-label="Select completed tasks">Completed</span>
+              <span className="task-filter__text" aria-label="Select completed tasks">{TodosFilterVales.Completed}</span>
             </label>
           </div>
         </div>

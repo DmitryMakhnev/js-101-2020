@@ -1,13 +1,18 @@
+import { TodoDataModel, TodoListModel } from '../data-model/todo-list-model';
 
-let idIdCounter = 0;
+let idCounter = 0;
+
+export type TodoUpdateDto = {
+  id: string;
+  isDone?: boolean;
+  text?: string;
+};
 
 export class TodoController {
-  /**
-   * @param {TodoListModel} todoListModel
-   */
-  constructor(todoListModel) {
-    this._todoListModel = todoListModel;
-  }
+
+  constructor(
+    private todoListModel: TodoListModel,
+  ) {}
 
   getAll() {
     fetch(
@@ -19,12 +24,15 @@ export class TodoController {
     )
       .then(response => response.json())
       .then(todoDataModels => {
-        this._todoListModel.storeInitialItems(todoDataModels);
+        this.todoListModel.storeInitialItems(todoDataModels);
       });
   }
 
-  createTodo = text => {
-    const newItem = this._todoListModel.addItem(idIdCounter, text);
+  createTodo = (text: string) => {
+    const newItem = this.todoListModel.addItem(
+      (idCounter++).toString(),
+      text
+    );
     fetch(
       'http://localhost:3012/todos',
       {
@@ -45,8 +53,8 @@ export class TodoController {
       });
   }
 
-  removeTodo = id => {
-    this._todoListModel.removeItem(id);
+  removeTodo = (id: string) => {
+    this.todoListModel.removeItem(id);
     fetch(
       'http://localhost:3012/todos',
       {
@@ -63,7 +71,7 @@ export class TodoController {
     );
   }
 
-  _debouncedUpdate = debounce(500, updateDto => {
+  _debouncedUpdate = debounce(500, (updateDto: TodoDataModel) => {
     fetch(
       'http://localhost:3012/todos',
       {
@@ -78,36 +86,38 @@ export class TodoController {
     );
   })
 
-  updateTodo = updateDto => {
-    const todoItem = this._todoListModel.items.find(item => item.id === updateDto.id);
-    if (updateDto.text) {
-      todoItem.text = updateDto.text;
-    }
-    if (updateDto.isDone != null) {
-      todoItem.isReady = updateDto.isDone;
+  updateTodo = (updateDto: TodoUpdateDto) => {
+    const todoItem = this.todoListModel.items.find(item => item.id === updateDto.id);
+    if (todoItem) {
+      if (updateDto.text) {
+        todoItem.text = updateDto.text;
+      }
+      if (updateDto.isDone != null) {
+        todoItem.isReady = updateDto.isDone;
+      }
     }
 
     this._debouncedUpdate(updateDto);
   };
 
   clearCompleted = () => {
-    this._todoListModel.items
+    this.todoListModel.items
       .filter(item => item.isReady)
       .forEach(item => this.removeTodo(item.id));
   }
 
   markAllAsReady = () => {
-    this._todoListModel.items
+    this.todoListModel.items
       .filter(item => !item.isReady)
       .forEach(item => this.updateTodo({ id: item.id, isDone: true }));
   }
 
 }
 
-function debounce(timeout, fn) {
-  let currentTimoutId = -1;
-  return (...args) => {
-    clearTimeout(currentTimoutId);
-    currentTimoutId = setTimeout(() => fn.apply(null, args), timeout);
+function debounce(timeout: number, fn: (...args: any[]) => any) {
+  let currentTimoutId: number = -1;
+  return (...args: any[]) => {
+    window.clearTimeout(currentTimoutId);
+    currentTimoutId = window.setTimeout(() => fn.apply(null, args), timeout);
   };
 }
