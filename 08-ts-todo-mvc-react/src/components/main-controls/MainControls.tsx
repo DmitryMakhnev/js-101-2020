@@ -1,11 +1,11 @@
 import React, { createRef } from 'react';
 
-interface propsType {
+interface PropsType {
   addNewTodo: (text: string) => void,
   markAllAsReady: () => void
 }
 
-export class MainControls extends React.Component<propsType> {
+export class MainControls extends React.Component<PropsType> {
   private inputRef: React.RefObject<HTMLInputElement> = createRef();
 
   render() {
@@ -37,6 +37,7 @@ export class MainControls extends React.Component<propsType> {
             className="main-controls__create-new-input"
             placeholder="What needs to be done?"
             aria-label="Add new item"
+            autoFocus
           />
         </form>
       </section>
