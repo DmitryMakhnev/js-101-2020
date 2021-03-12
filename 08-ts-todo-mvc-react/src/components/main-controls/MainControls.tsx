@@ -9,8 +9,8 @@ export class MainControls extends React.Component<{
   render() {
     const onSubmit = (e: FormEvent) => {
       e.preventDefault();
-      const input = this._inputRef.current!;
-      const currentNewTodoText = input.value.trim();
+      const input: HTMLInputElement = this._inputRef.current!;
+      const currentNewTodoText: string = input.value.trim();
       if (currentNewTodoText) {
         input.value = '';
         this.props.addNewTodo(currentNewTodoText);
