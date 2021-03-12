@@ -2,7 +2,7 @@ import React, { createRef } from 'react';
 
 export class MainControls extends React.Component<{
     addNewTodo: (text: string) => void,
-    markAllAsReady: () => void,
+    markAllAsReady: () => void
 }> {
   _inputRef: React.RefObject<HTMLInputElement> = createRef();
 
