@@ -1,0 +1,29 @@
+/**
+* author: Ivan Metelev || ok.ru/i.metelev/
+* created: 13.10.19
+*
+* @project class: .actions-bar
+* @comments: Панель дополнительных действий над списком задач
+**/
+
+/* Actions bar
+---------------------------------------------------------------------------------- */
+
+.actions-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px #E6E6E6 solid;
+    height: 40px;
+    padding: 3px 12px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #888;
+    }
+
+    .actions-bar__item {
+        
+        }
+
+/* /Actions bar
+---------------------------------------------------------------------------------- */

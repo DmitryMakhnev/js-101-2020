@@ -1,0 +1,99 @@
+/**
+* author: Ivan Metelev || ok.ru/i.metelev/
+* created: 13.10.19
+*
+* @project class: .task-item
+* @comments: Вывод и редактирование задачи
+**/
+
+/* Task item
+---------------------------------------------------------------------------------- */
+
+.task-item {
+    box-sizing: border-box;
+    border-bottom: 1px #E6E6E6 solid;
+    }
+
+    .task-item__view {
+        display: flex;
+        flex-grow: 1;
+        align-items: center;
+        min-height: 59px;
+        padding-left: 12px;
+        overflow: hidden;
+        }
+        .task-item__view:hover {
+            background-color: #FAFAFA;
+            }
+
+        .task-item__status-input {
+            position: absolute;
+            opacity: 0;
+            width: 30px;
+            height: 30px;
+            }
+
+        .task-item__status-icon {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            box-sizing: border-box;
+            margin-right: 12px;
+            border: 1px #E6E6E6 solid;
+            border-radius: 50%;
+            background-color: #fff;
+            }
+            .task-item__status-input:checked + .task-item__status-icon {
+                background-image: url("../img/check.svg");
+                background-position: 6px 8px;
+                background-repeat: no-repeat;
+                border-color: #5DC2AF;
+                }
+            .task-item__status-input:focus + .task-item__status-icon {
+                border-color: #CCCCCC;
+                }
+            .task-item__view:hover .task-item__status-input:not(:checked) + .task-item__status-icon {
+                border-color: #CCCCCC;
+                }
+
+        .task-item__text {
+            display: flex;
+            flex-grow: 1;
+            min-width: 0;
+            padding: 12px 0;
+            word-break: break-word;
+            font-size: 24px;
+            }
+            .task-item__status-input:checked ~ .task-item__text {
+                color: #CCCCCC;
+                text-decoration: line-through;
+                }
+
+        .task-item__delete {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            margin: -9999px 4px 0 12px;
+            text-indent: -9999px;
+            background-image: url("../img/cross.svg");
+            background-repeat: no-repeat;
+            background-position: 50%;
+            }
+            .task-item__delete:focus,
+            .task-item__view:hover .task-item__delete {
+                margin-top: 0;
+                }
+
+    .task-item__edit {
+        padding-left: 56px;
+        }
+
+        .task-item__input {
+            height: 59px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 24px;
+            }
+
+/* /Task item
+---------------------------------------------------------------------------------- */
