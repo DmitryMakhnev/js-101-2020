@@ -30,7 +30,11 @@ export class MainControls extends React.Component {
             Select all tasks
           </button>
         </div>
-        <form className="main-controls__create-new" onSubmit={onSubmit}>
+        <form
+          className="main-controls__create-new"
+          onSubmit={onSubmit}
+          data-test-id="create-new-todo-form"
+        >
           <input
             ref={this._inputRef}
             type="text"
@@ -38,6 +42,7 @@ export class MainControls extends React.Component {
             placeholder="What needs to be done?"
             aria-label="Add new item"
             autoFocus="autofocus"
+            data-test-id="create-new-todo-form__todo-text-input"
           />
         </form>
       </section>

@@ -49,26 +49,32 @@ export const AuthPage = observer(class extends React.Component<
     } = this.props;
 
     return (
-      <div className="auth-page">
-        <form onSubmit={this.onSubmit}>
+      <div className="auth-page" data-test-id="auth-page">
+        <form onSubmit={this.onSubmit} data-test-id="auth-form">
           <input
             placeholder="login"
             value={this.state.login}
             onInput={this.onLoginChange}
+            data-test-id="auth-form__login-input"
           />
           <input
             placeholder="password"
             type="password"
             value={this.state.password}
             onInput={this.onPasswordChange}
+            data-test-id="auth-form__password-input"
           />
-          <button type="submit">
+          <button type="submit" data-test-id="auth-form__submit">
             {userModel.isLoginLoading ? 'Loading...' : 'Sign in'}
           </button>
 
           {userModel.loginError && (
-            <div style={{ color: '#f00' }}>
-              { userModel.loginError }
+            <div
+              style={{ color: '#f00' }}
+              data-test-id="auth-form__error"
+              data-test-error-name={userModel.loginError.name}
+            >
+              { userModel.loginError.message }
             </div>
           )}
         </form>

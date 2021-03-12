@@ -25,8 +25,11 @@ describe('TodoController', () => {
 
       todoController.getAll();
 
+      expect(todoListModel.isLoading).toBeTruthy();
+
       await runFetch();
 
+      expect(todoListModel.isLoading).toBeFalsy();
       expect(todoListModel.items.length).toBe(todosFixture.length);
       expect(todoListModel.items[0].id).toBe(todosFixture[0].id);
       expect(todoListModel.items[1].id).toBe(todosFixture[1].id);

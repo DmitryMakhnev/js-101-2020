@@ -1,4 +1,9 @@
 import { UserDataModel, UserModel } from '../data-model/user-model';
+import { INCORRECT_LOGIN_OR_PASSWORD_ERROR_NAME } from '../consts/errors/names';
+
+class IncorrectLoginOrPasswordError extends Error {
+  name = INCORRECT_LOGIN_OR_PASSWORD_ERROR_NAME;
+}
 
 export class UserController {
   constructor(
@@ -64,7 +69,7 @@ export class UserController {
           if (response.ok) {
             return response.json() as unknown as UserDataModel;
           } else {
-            throw new Error('Incorrect login or password');
+            throw new IncorrectLoginOrPasswordError('Incorrect login or password');
           }
         }
       )
@@ -75,7 +80,7 @@ export class UserController {
         }
       )
       .catch(e => {
-        this.userModel.loginError = e.message;
+        this.userModel.loginError = e;
       })
       .finally(() => {
         this.userModel.isLoginLoading = false;

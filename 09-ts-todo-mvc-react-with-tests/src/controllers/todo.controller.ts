@@ -15,6 +15,7 @@ export class TodoController {
   ) {}
 
   getAll() {
+    this.todoListModel.isLoading = true;
     fetch(
       'http://localhost:3012/todos',
       {
@@ -24,6 +25,7 @@ export class TodoController {
     )
       .then(response => response.json())
       .then(todoDataModels => {
+        this.todoListModel.isLoading = false;
         this.todoListModel.storeInitialItems(todoDataModels);
       });
   }

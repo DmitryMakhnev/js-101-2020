@@ -17,7 +17,10 @@ export const Tasks = observer(class extends React.Component<{
 
     return (
       <section className="todo-app__tasks">
-        <ul className="todo-app__task-list tasks js-todo-items-list">
+        <ul
+          className="todo-app__task-list tasks js-todo-items-list"
+          data-test-id="todos-list"
+        >
           {todoListModel.items
             .filter(item => {
               switch (todoListModel.currentFilterId) {

@@ -14,7 +14,7 @@ export class UserModel {
   dataModel: UserDataModel|null = null;
 
   isLoginLoading: boolean = false;
-  loginError: string|null = null;
+  loginError: Error|null = null;
 
   constructor() {
     makeObservable(
