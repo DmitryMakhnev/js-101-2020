@@ -4,12 +4,12 @@ export class MainControls extends React.Component<{
     addNewTodo: (text: string) => void,
     markAllAsReady: () => void
 }> {
-  _inputRef: React.RefObject<HTMLInputElement> = createRef();
+  private inputRef: React.RefObject<HTMLInputElement> = createRef();
 
   render() {
     const onSubmit = (e: React.FormEvent) => {
       e.preventDefault();
-      const input: HTMLInputElement = this._inputRef.current as HTMLInputElement;
+      const input: HTMLInputElement = this.inputRef.current as HTMLInputElement;
       const currentNewTodoText: string = input.value.trim();
       if (currentNewTodoText) {
         input.value = '';
@@ -30,7 +30,7 @@ export class MainControls extends React.Component<{
         </div>
         <form className="main-controls__create-new" onSubmit={onSubmit}>
           <input
-            ref={this._inputRef}
+            ref={this.inputRef}
             type="text"
             className="main-controls__create-new-input"
             placeholder="What needs to be done?"
