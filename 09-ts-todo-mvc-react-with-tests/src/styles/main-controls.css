@@ -1,0 +1,45 @@
+/**
+* author: Ivan Metelev || ok.ru/i.metelev/
+* created: 13.10.19
+*
+* @project class: .main-controls
+* @comments: Панель основных действий над списком задач
+**/
+
+/* Main controls
+---------------------------------------------------------------------------------- */
+
+.main-controls {
+    display: flex;
+    height: 64px;
+    box-sizing: border-box;
+    border-bottom: 1px #E6E6E6 solid;
+    }
+
+    .main-controls__select-all {
+        flex-shrink: 0;
+        }
+
+        .main-controls__select-all-button {
+            height: 64px;
+            width: 56px;
+            text-indent: -9999px;
+            background-image: url("../img/select-all.svg");
+            background-repeat: no-repeat;
+            background-position: 15px 26px;
+            }
+
+    .main-controls__create-new {
+        flex-grow: 1;
+        }
+
+        .main-controls__create-new-input {
+            width: 100%;
+            height: 64px;
+            padding-top: 4px;
+            box-sizing: border-box;
+            font-size: 24px;
+            }
+
+/* /Main controls
+---------------------------------------------------------------------------------- */

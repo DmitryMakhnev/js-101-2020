@@ -1,0 +1,22 @@
+/**
+* author: Ivan Metelev || ok.ru/i.metelev/
+* created: 13.10.19
+*
+* @project class: .title
+* @comments: Заголовок
+**/
+
+/* Title
+---------------------------------------------------------------------------------- */
+
+.title {
+    text-align: center;
+    color: #ccc;
+    font-weight: 100;
+    font-size: 100px;
+    text-transform: lowercase;
+    line-height: 1;
+    }
+
+/* /Title
+---------------------------------------------------------------------------------- */

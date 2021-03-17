@@ -1,0 +1,43 @@
+/**
+* author: Ivan Metelev || ok.ru/i.metelev/
+* created: 13.10.19
+*
+* @project class: .task-filter
+* @comments: Управление фильтрацией задач по заданному признаку
+**/
+
+/* Task filter
+---------------------------------------------------------------------------------- */
+
+.task-filter {
+    display: flex;
+    }
+
+    .task-filter__item {
+        padding: 8px 0;
+        overflow: hidden;
+        }
+        .task-filter__item + .task-filter__item {
+            margin-left: 6px;
+            }
+
+        .task-filter__input {
+            width: 30px;
+            height: 0;
+            margin-left: -30px;
+            }
+
+        .task-filter__text {
+            padding: 2px 6px;
+            border: 1px transparent solid;
+            border-radius: 3px;
+            }
+            .task-filter__input:checked + .task-filter__text {
+                border-color: #EBDFDF;
+                }
+            .task-filter__input:focus + .task-filter__text {
+                border-color: #CCCCCC;
+                }
+
+/* /Task filter
+---------------------------------------------------------------------------------- */
