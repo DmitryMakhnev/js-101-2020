@@ -55,4 +55,37 @@ describe('Manage Todos', () => {
       cy.get('[data-test-id=todo-item__remove-action]').should('be.visible');
     });
   });
+
+  context('Deletion', () => {
+    it('Delete single todo', () => {
+      cy.fixture('todo-item.response.json').then((todoItemResponse)  => {
+        cy.intercept(
+            'POST',
+            todosEndpoint,
+            req => {
+              const { body } = req;
+              req.reply({
+                statusCode: 200,
+                body: JSON.stringify({
+                  ...todoItemResponse,
+                  text: body.text
+                })
+              });
+            }
+        ).as('createTodo');
+      });
+
+      authorize();
+
+      const itemText = Math.random().toString() + '_' + Date.now();
+      cy.get('[data-test-id=create-new-todo-form__todo-text-input]').type(itemText);
+      cy.get('[data-test-id=create-new-todo-form]').submit();
+      cy.wait('@createTodo');
+
+      cy.get('[data-test-id=todo-item__remove-action]').click({force: true})
+      cy.get('[data-test-id=todo-item]').should('not.exist');
+      cy.get('[data-test-id=todos-list]').should('be.empty');
+      cy.get('[data-test-id=task-counter]').should('have.text', "0 items left");
+    });
+  });
 });
