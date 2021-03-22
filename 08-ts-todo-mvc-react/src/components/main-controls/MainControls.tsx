@@ -1,24 +1,24 @@
-// HOME WORK COMPONENT! Please don't rewrite me during lecture!
 import React, { createRef } from 'react';
 
-// HOME WORK COMPONENT! Please don't rewrite me during lecture!
-export class MainControls extends React.Component {
+interface PropsType {
+  addNewTodo: (text: string) => void,
+  markAllAsReady: () => void
+}
+
+export class MainControls extends React.Component<PropsType> {
   _inputRef = createRef();
 
-  // HOME WORK COMPONENT! Please don't rewrite me during lecture!
   render() {
-    // HOME WORK COMPONENT! Please don't rewrite me during lecture!
-    const onSubmit = e => {
+    const onSubmit = (e : React.FormEvent) => {
       e.preventDefault();
-      const input = this._inputRef.current;
-      const currentNewTodoText = input.value.trim();
+      const input: HTMLInputElement = this._inputRef.current;
+      const currentNewTodoText: string = input.value.trim();
       if (currentNewTodoText) {
         input.value = '';
         this.props.addNewTodo(currentNewTodoText);
       }
     }
 
-    // HOME WORK COMPONENT! Please don't rewrite me during lecture!
     return (
       <section className="todo-app__main-controls main-controls">
         <div className="main-controls__select-all">
