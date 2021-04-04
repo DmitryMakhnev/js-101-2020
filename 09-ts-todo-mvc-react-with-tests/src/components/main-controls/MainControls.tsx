@@ -1,51 +1,42 @@
-import React, { useRef } from 'react';
+import React, {FunctionComponent, useRef} from 'react';
 
-export const MainControls = (props: {
+type PropsType = {
   addNewTodo: (text: string) => void,
   markAllAsReady: () => void
-}) => {
+}
 
-  const _inputRef: React.RefObject<HTMLInputElement> = useRef(null);
-
+export const MainControls: FunctionComponent<PropsType> = (props: PropsType) => {
+  const inputRef: React.RefObject<HTMLInputElement> = useRef<HTMLInputElement>(null);
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const input = _inputRef.current;
-    if (input) {
-      const currentNewTodoText = input.value.trim();
-      if (currentNewTodoText) {
-        input.value = '';
-        props.addNewTodo(currentNewTodoText);
-      }
+    const input: HTMLInputElement = inputRef.current as HTMLInputElement;
+    const currentNewTodoText = input?.value.trim();
+    if (currentNewTodoText) {
+      input.value = '';
+      props.addNewTodo(currentNewTodoText);
     }
   }
-
   return (
-    <section className="todo-app__main-controls main-controls">
-      <div className="main-controls__select-all">
-        <button
-          className="main-controls__select-all-button"
-          title="Select all tasks"
-          onClick={props.markAllAsReady}
-        >
-          Select all tasks
-        </button>
-      </div>
-      <form
-        className="main-controls__create-new"
-        onSubmit={onSubmit}
-        data-test-id="create-new-todo-form"
-      >
-        <input
-          ref={_inputRef}
-          type="text"
-          className="main-controls__create-new-input"
-          placeholder="What needs to be done?"
-          aria-label="Add new item"
-          autoFocus
-          data-test-id="create-new-todo-form__todo-text-input"
-        />
-      </form>
-    </section>
+      <section className="todo-app__main-controls main-controls">
+        <div className="main-controls__select-all">
+          <button
+              className="main-controls__select-all-button"
+              title="Select all tasks"
+              onClick={props.markAllAsReady}
+          >
+            Select all tasks
+          </button>
+        </div>
+        <form className="main-controls__create-new" onSubmit={onSubmit}>
+          <input
+              ref={inputRef}
+              type="text"
+              className="main-controls__create-new-input"
+              placeholder="What needs to be done?"
+              aria-label="Add new item"
+              autoFocus
+          />
+        </form>
+      </section>
   );
-}
-ProTip! Use n and p to navigate between com
+};
