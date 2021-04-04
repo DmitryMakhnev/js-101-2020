@@ -1,0 +1,22 @@
+/**
+* author: Ivan Metelev || ok.ru/i.metelev/
+* created: 13.10.19
+*
+* @project class: .task-clear-completed
+* @comments: Управление сбросом состояния задач, отмеченных выполненными
+**/
+
+/* Clear completed task status button
+---------------------------------------------------------------------------------- */
+
+.task-clear-completed {
+    margin: 0;
+    border: 0;
+    padding: 8px 0;
+    font-size: 14px;
+    color: #888;
+    font-weight: 300;
+    }
+
+/* /Clear completed task status button
+---------------------------------------------------------------------------------- */

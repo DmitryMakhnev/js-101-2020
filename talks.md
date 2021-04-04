@@ -12,6 +12,8 @@
 - [Кирилл Черкашин — Работаем с абстрактными синтаксическими деревьями JavaScript](https://www.youtube.com/watch?v=ILSpvViUlPU)
 - [Стас Курилов — Глубокое погружение в webpack](https://www.youtube.com/watch?v=aiYkJOPD9v8)
 - [Алексей Козятинский — Протокол Chrome DevTools](https://www.youtube.com/watch?v=z0TP-9QSdHI)
+- [Роман Дворнов — Unit-тестирование скриншотами: преодолеваем звуковой барьер](https://www.youtube.com/watch?v=ULwdj_Vr_WA)
+- [Дмитрий Махнёв — Wallaby.js & Quokka.js. Быстро. Красиво. Качественно](https://www.youtube.com/watch?v=wyxdGtwQLFs)
 
 ## Best practice
 

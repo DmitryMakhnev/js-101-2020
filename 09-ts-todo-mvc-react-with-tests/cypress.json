@@ -1,0 +1,5 @@
+{
+  "videoUploadOnPasses": false,
+  "integrationFolder": "tests/e2e/",
+  "testFiles": "**/*.spec.ts"
+}

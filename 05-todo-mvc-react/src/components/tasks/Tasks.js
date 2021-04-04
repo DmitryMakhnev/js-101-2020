@@ -31,6 +31,7 @@ export const Tasks = observer(class extends React.Component {
             })
             .map(item =>
               <TaskItem
+                className="todo-app__task-item"
                 key={item.id}
                 itemModel={item}
                 readyChange={isReady => todoController.updateTodo(
