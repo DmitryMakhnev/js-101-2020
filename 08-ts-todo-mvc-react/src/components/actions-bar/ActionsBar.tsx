@@ -17,6 +17,7 @@ export class ActionsBar extends React.Component<{
       }
     }
 
+
     return (
       <section className="todo-app__actions-bar actions-bar">
         <div className="actions-bar__item">
