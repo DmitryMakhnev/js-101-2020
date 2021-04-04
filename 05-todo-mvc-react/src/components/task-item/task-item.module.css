@@ -9,12 +9,12 @@
 /* Task item
 ---------------------------------------------------------------------------------- */
 
-.task-item {
+.root {
     box-sizing: border-box;
     border-bottom: 1px #E6E6E6 solid;
     }
 
-    .task-item__view {
+    .view {
         display: flex;
         flex-grow: 1;
         align-items: center;
@@ -22,18 +22,18 @@
         padding-left: 12px;
         overflow: hidden;
         }
-        .task-item__view:hover {
+        .view:hover {
             background-color: #FAFAFA;
             }
 
-        .task-item__status-input {
+        .statusInput {
             position: absolute;
             opacity: 0;
             width: 30px;
             height: 30px;
             }
 
-        .task-item__status-icon {
+        .statusIcon {
             flex-shrink: 0;
             width: 36px;
             height: 36px;
@@ -43,16 +43,16 @@
             border-radius: 50%;
             background-color: #fff;
             }
-            .task-item__status-input:checked + .task-item__status-icon {
-                background-image: url("../img/check.svg");
+            .statusInput:checked + .statusIcon {
+                background-image: url("./img/check.svg");
                 background-position: 6px 8px;
                 background-repeat: no-repeat;
                 border-color: #5DC2AF;
                 }
-            .task-item__status-input:focus + .task-item__status-icon {
+            .statusInput:focus + .statusIcon {
                 border-color: #CCCCCC;
                 }
-            .task-item__view:hover .task-item__status-input:not(:checked) + .task-item__status-icon {
+            .view:hover .statusInput:not(:checked) + .statusIcon {
                 border-color: #CCCCCC;
                 }
 
@@ -75,7 +75,7 @@
             height: 36px;
             margin: -9999px 4px 0 12px;
             text-indent: -9999px;
-            background-image: url("../img/cross.svg");
+            background-image: url("./img/cross.svg");
             background-repeat: no-repeat;
             background-position: 50%;
             }
