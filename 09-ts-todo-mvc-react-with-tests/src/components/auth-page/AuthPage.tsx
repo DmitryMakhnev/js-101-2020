@@ -1,9 +1,7 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { observer } from 'mobx-react';
 import { UserController } from '../../controllers/user.controller';
 import { UserModel } from '../../data-model/user-model';
-
-const hash = (val: string) => Math.random().toString(16);
 
 export const AuthPage = observer((props:
   {
@@ -15,11 +13,6 @@ export const AuthPage = observer((props:
     login: '',
     password: ''
   });
-
-  const passwordHash = useMemo(() => {
-    console.log('calc hash');
-    return hash(state.password);
-  }, [state.password]);
 
   const onLoginChange = (e: React.FormEvent<HTMLInputElement>) => {
     const newLogin = (e.target as HTMLInputElement).value;

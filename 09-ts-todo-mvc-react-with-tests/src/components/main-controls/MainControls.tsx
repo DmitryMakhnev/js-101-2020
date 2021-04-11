@@ -48,4 +48,3 @@ export const MainControls = (props: {
     </section>
   );
 }
-ProTip! Use n and p to navigate between com
