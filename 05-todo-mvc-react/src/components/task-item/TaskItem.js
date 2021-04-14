@@ -1,5 +1,14 @@
 import React from 'react';
 import { observer } from 'mobx-react';
+import cn from 'classnames';
+
+import styles from './task-item.module.css';
+
+const isProduction = true;
+
+function generateTestDataAttribute(value) {
+  return !isProduction ? {'data-test': value} : {};
+}
 
 export const TaskItem = observer(class extends React.Component {
   render() {
@@ -7,19 +16,20 @@ export const TaskItem = observer(class extends React.Component {
      * @type {TodoItemModel}
      */
     const todoItem = this.props.itemModel;
+    const className = this.props.className;
 
     return (
-      <li className="todo-app__task-item task-item">
-        <div className="task-item__view">
+      <li className={cn(className, styles.root)} {...generateTestDataAttribute('todo-item')}>
+        <div className={styles.view}>
           <input
             type="checkbox"
             checked={todoItem.isReady}
             onChange={e => this.props.readyChange(e.target.checked)}
-            className="task-item__status-input"
+            className={styles.statusInput}
             id={`item_${todoItem.id}`}
             aria-label={`Completed task: ${todoItem.text}`}
           />
-          <label className="task-item__status-icon" htmlFor={`item_${todoItem.id}`} />
+          <label className={styles.statusIcon} htmlFor={`item_${todoItem.id}`} />
           <input
             className="task-item__text"
             onInput={e => this.props.textChange(e.target.value)}

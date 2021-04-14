@@ -5,7 +5,7 @@ import { AuthGuard } from './modules/auth/auth.guard';
 import { AuthSessionService } from './modules/auth/auth-session.service';
 import { CookieSessionManagerService } from './modules/auth/cookie-session-manager.service';
 import { TodosService } from './modules/todos/todos.service';
-import { TodoController } from './modules/todos/todoController';
+import { TodoController } from './modules/todos/todo.controller';
 import { UserController } from './modules/user/user.controller';
 
 @Module({

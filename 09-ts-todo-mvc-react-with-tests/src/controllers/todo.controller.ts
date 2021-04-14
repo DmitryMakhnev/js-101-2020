@@ -1,4 +1,5 @@
 import { TodoDataModel, TodoListModel } from '../data-model/todo-list-model';
+import { todosEndpoint } from '../consts/urls';
 
 let idCounter = 0;
 
@@ -17,7 +18,7 @@ export class TodoController {
   getAll() {
     this.todoListModel.isLoading = true;
     fetch(
-      'http://localhost:3012/todos',
+      todosEndpoint,
       {
         mode: 'cors',
         credentials: 'include'
@@ -36,7 +37,7 @@ export class TodoController {
       text
     );
     fetch(
-      'http://localhost:3012/todos',
+      todosEndpoint,
       {
         method: 'POST',
         mode: 'cors',
@@ -58,7 +59,7 @@ export class TodoController {
   removeTodo = (id: string) => {
     this.todoListModel.removeItem(id);
     fetch(
-      'http://localhost:3012/todos',
+      todosEndpoint,
       {
         method: 'DELETE',
         mode: 'cors',
@@ -75,7 +76,7 @@ export class TodoController {
 
   _debouncedUpdate = debounce(500, (updateDto: TodoDataModel) => {
     fetch(
-      'http://localhost:3012/todos',
+      todosEndpoint,
       {
         method: 'PATCH',
         mode: 'cors',

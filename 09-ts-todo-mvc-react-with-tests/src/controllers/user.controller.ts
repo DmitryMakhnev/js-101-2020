@@ -1,5 +1,6 @@
 import { UserDataModel, UserModel } from '../data-model/user-model';
 import { INCORRECT_LOGIN_OR_PASSWORD_ERROR_NAME } from '../consts/errors/names';
+import { authEndpoint, getUserEndpoint, logoutEndpoint } from '../consts/urls';
 
 class IncorrectLoginOrPasswordError extends Error {
   name = INCORRECT_LOGIN_OR_PASSWORD_ERROR_NAME;
@@ -14,7 +15,7 @@ export class UserController {
     this.userModel.isLoading = true;
 
     return fetch(
-      'http://localhost:3012/user',
+      getUserEndpoint,
       {
         mode: 'cors',
         credentials: 'include'
@@ -50,7 +51,7 @@ export class UserController {
     this.userModel.isLoginLoading = true;
 
     return fetch(
-      'http://localhost:3012/auth/login',
+      authEndpoint,
       {
         method: 'POST',
         mode: 'cors',
@@ -89,7 +90,7 @@ export class UserController {
 
   logout(): Promise<void> {
     return fetch(
-      'http://localhost:3012/auth/logout',
+      logoutEndpoint,
       {
         method: 'POST',
         mode: 'cors',

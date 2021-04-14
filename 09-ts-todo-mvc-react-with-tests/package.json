@@ -48,5 +48,6 @@
     "@bahmutov/add-typescript-to-cypress": "^2.1.2",
     "cypress": "^6.6.0",
     "webpack": "^5.25.0"
-  }
+  },
+  "proxy": "http://localhost:3012"
 }
