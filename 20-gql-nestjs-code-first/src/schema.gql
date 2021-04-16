@@ -1,0 +1,36 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+"""Author of a book"""
+type Author {
+  id: Int!
+  firstName: String!
+  middleName: String
+  lastName: String
+  birthDate: String
+  deathDate: String
+}
+
+type Book {
+  id: String!
+  title: String!
+  author: Author!
+}
+
+type Library {
+  id: String!
+  name: String!
+  books: [Book!]!
+}
+
+type Query {
+  authors(id: Int): [Author!]!
+  author(id: Int!): Author
+  books(id: String): [Book!]!
+  libraries(name: String, id: String): [Library!]!
+}
+
+type Mutation {
+  addAuthor(firstName: String!, middleName: String, lastName: String, birthDate: String, deathDate: String): Author!
+}
