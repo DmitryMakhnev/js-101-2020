@@ -1,0 +1,8 @@
+<form (submit)="tryLogin()">
+  <input type="text" [(ngModel)]="login" name="login" />
+  <input type="password" [(ngModel)]="password" name="password" />
+  <button type="submit">Sing in</button>
+  <div *ngIf="hasError" style="color: #f00">
+    Incorrect login or password
+  </div>
+</form>
