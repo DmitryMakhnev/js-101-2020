@@ -6,14 +6,14 @@ export class MainControls extends React.Component<{
   addNewTodo: (text: string) => void,
   markAllAsReady: () => void
 }> {
-  _inputRef: RefObject<HTMLInputElement>= createRef();
+  _inputRef: RefObject<HTMLInputElement> = createRef();
 
   // HOME WORK COMPONENT! Please don't rewrite me during lecture!
   render() {
     // HOME WORK COMPONENT! Please don't rewrite me during lecture!
     const onSubmit = (e: FormEvent) => {
       e.preventDefault();
-      const input = this._inputRef.current!!;
+      const input: HTMLInputElement = this._inputRef.current as HTMLInputElement;
       const currentNewTodoText = input.value.trim();
       if (currentNewTodoText) {
         input.value = '';
