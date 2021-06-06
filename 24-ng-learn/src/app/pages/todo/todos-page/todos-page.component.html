@@ -1,0 +1,31 @@
+<form (submit)="onAdd()">
+  <input [(ngModel)]="newTodoText" type="text" name="new-todo-text" />
+  <button type="submit">Add</button>
+</form>
+
+<ng-container *ngFor="let todo of filteredTodos">
+  <div>
+    <input type="checkbox" [(ngModel)]="todo.isDone">
+    <span>{{todo.text}}</span>
+    <button (click)="todosService.removeTodo(todo.id)">remove</button>
+  </div>
+</ng-container>
+
+<hr />
+
+<span>Items left: {{ undoneItemsCount }}</span>
+
+<div>
+  <button *ngFor="let filter of filters" (click)="chooseFilter(filter)">
+    {{filter}}
+  </button>
+</div>
+
+<hr />
+
+<button (click)="todosService.markAllAsDone()">Mark all as done</button>
+
+<hr />
+<hr />
+
+<button (click)="logout()">Logout</button>
