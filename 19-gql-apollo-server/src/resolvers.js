@@ -49,7 +49,15 @@ const resolvers = {
       };
       libraries.push(newLibrary);
       return libraries;
-    }
+    },
+    setBookTitle(_, { id, title }) {
+      const bookIndex = books.findIndex(book => book.id === id);
+      if (bookIndex === -1) {
+        throw new Error("Book not found");
+      }
+      let book = books[bookIndex];
+      book.title = title;
+      return book;
   }
 };
 
